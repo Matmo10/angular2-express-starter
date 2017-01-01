@@ -113,7 +113,7 @@ if (!DEV_SERVER) {
 }
 
 const commonConfig = function webpackConfig(): WebpackConfig {
-  let config: WebpackConfig = Object.assign({});
+  let config: WebpackConfig = (<any>Object).assign({});
 
   config.module = {
     rules: [
@@ -199,9 +199,11 @@ const commonConfig = function webpackConfig(): WebpackConfig {
       ...MY_CLIENT_PRODUCTION_PLUGINS,
     );
     if (!E2E && !WATCH && !UNIVERSAL) {
+/*
       config.plugins.push(
         new BundleAnalyzerPlugin({analyzerPort: 5000})
       );
+*/
     }
   }
 
@@ -211,7 +213,7 @@ const commonConfig = function webpackConfig(): WebpackConfig {
 // type definition for WebpackConfig at the bottom
 const clientConfig = function webpackConfig(): WebpackConfig {
 
-  let config: WebpackConfig = Object.assign({});
+  let config: WebpackConfig = (<any>Object).assign({});
 
   config.cache = true;
   PROD ? config.devtool = PROD_SOURCE_MAPS : config.devtool = DEV_SOURCE_MAPS;
@@ -288,7 +290,7 @@ const clientConfig = function webpackConfig(): WebpackConfig {
   };
 
   if (USE_DEV_SERVER_PROXY) {
-    Object.assign(config.devServer, {
+    (<any>Object).assign(config.devServer, {
       proxy: DEV_SERVER_PROXY_CONFIG
     });
   }
